@@ -76,10 +76,12 @@ public class Main {
                     break;
 
                 case 4:
+                    library.addBook(keyboard);
 
                     break;
 
                 case 5:
+                    library.addMagazine(keyboard);
 
                     break;
 
@@ -107,7 +109,6 @@ public class Main {
         System.out.println("| Val 5: Lägg till en tidning i systemet.|");
         System.out.println("| Val 6: Avsluta programmet.             |");
         System.out.println("| Skriv 1-6.                             |");
-        ;
         System.out.println("==========================================");
     }
 

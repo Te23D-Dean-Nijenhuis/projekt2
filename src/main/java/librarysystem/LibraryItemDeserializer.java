@@ -1,8 +1,8 @@
 /*
 Dean Nijenhuis TE23D
-Main, detta är filen som körs, som använder andra filer.
+denna klassen gör det lättare att hämta informationen från servern, men den används inte i nuläget- 
+kommer kanske inte göra det alls
  */
-
 
 package librarysystem;
 
