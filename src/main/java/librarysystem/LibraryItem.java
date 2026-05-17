@@ -1,3 +1,10 @@
+/*
+Dean Nijenhuis TE23D
+Denna klassen är en abstract klass som är libraryitem, både book och magazine ärver från denna. 
+Namnet är en ganska tydlig beskrvining på vad det är.
+ */
+
+
 package librarysystem;
 
 public abstract class LibraryItem {

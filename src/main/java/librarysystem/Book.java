@@ -1,3 +1,9 @@
+/*
+Dean Nijenhuis TE23D
+Denna klassen är som det låter, en Book 
+ */
+
+
 package librarysystem;
 
 public class Book extends LibraryItem {
