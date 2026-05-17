@@ -26,12 +26,9 @@ public class Main {
         menu();
         int val = -999;
 
+        
         while (val != 6) {
-            while (val < 1 || val > 6) {
-                val = readInt(keyboard);
-                if (val < 1 || val > 6) {
-                    System.out.println("talet måste vara mellan 1 och 6");
-                }
+            val = val(6,keyboard);
             }
 
             switch (val) {
@@ -111,12 +108,12 @@ public class Main {
 
     }
 
-    public static int Val(int antalVal, Scanner keyboard) throws InterruptedException { // dyanamisk val metod där det
+    public static int val(int antalVal, Scanner keyboard) throws InterruptedException { // dyanamisk val metod där det
         // går att besämma antalet val;
         boolean success = false;
         int val = 0;
         while (!success) {
-            val = readint(keyboard);
+            val = readInt(keyboard);
             if (val > 0 && val <= antalVal) {
                 success = true;
             } else {
