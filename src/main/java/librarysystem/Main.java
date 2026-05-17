@@ -21,8 +21,10 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        String baseUrl = "http://localhost:3000/";
-        Gson gson = new Gson();
+        Library library = new Library();
+        library.importAllBooks();
+        library.printBookCount();
+
         menu();
         
     }
