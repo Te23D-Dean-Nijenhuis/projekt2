@@ -7,19 +7,19 @@ Denna klassen är som det låter, en Book
 package librarysystem;
 
 public class Book extends LibraryItem {
-    private String Author;
+    private String author;
     private String genre;
     private int pages;
 
     public Book(String id, String title, boolean isAvailable, String author, String genre, int pages) {
         super(id, title, isAvailable);
-        this.Author = author;
+        this.author = author;
         this.genre = genre;
         this.pages = pages;
     }
 
     public String getAuthor() {
-        return Author;
+        return author;
     }
 
     public String getGenre() {
@@ -32,7 +32,7 @@ public class Book extends LibraryItem {
 
     @Override
     public String toString() {
-        return "Book [Author=" + Author + ", genre=" + genre + ", pages=" + pages + ", id=" + id + ", title=" + title
+        return "Book [Author=" + author + ", genre=" + genre + ", pages=" + pages + ", id=" + id + ", title=" + title
                 + ", isAvailable=" + isAvailable + "]";
     }
 
