@@ -21,12 +21,55 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
         Library library = new Library();
-        library.importAllBooks();
-        library.printBookCount();
-
         menu();
-        
+        int val = -999;
+
+        while (val != 6) {
+            while (val < 1 || val > 6) {
+                val = readInt(keyboard);
+                if (val < 1 || val > 6) {
+                    System.out.println("talet måste vara mellan 1 och 6");
+                }
+            }
+
+            switch (val) {
+                case 1:
+                    library.importAllBooks();
+
+                    System.out.println("Alla böcker importerade");
+
+                    break;
+
+                case 2:
+                    library.importAllMagazines();
+
+                    System.out.println("Alla tidningar hämtade");
+
+                    break;
+
+                case 3:
+
+                    break;
+
+                case 4:
+
+                    break;
+
+                case 5:
+
+                    break;
+
+                case 6:
+
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
     }
 
     public static void menu() {
@@ -38,7 +81,8 @@ public class Main {
         System.out.println("| Val 4: Lägg till en bok i systemet.    |");
         System.out.println("| Val 5: Lägg till en tidning i systemet.|");
         System.out.println("| Val 6: Avsluta programmet.             |");
-        System.out.println("| Skriv 1-6.                             |");;
+        System.out.println("| Skriv 1-6.                             |");
+        ;
         System.out.println("==========================================");
     }
 
@@ -65,5 +109,22 @@ public class Main {
         keyboard.nextLine();
         return temp;
 
+    }
+
+    public static int Val(int antalVal, Scanner keyboard) throws InterruptedException { // dyanamisk val metod där det
+        // går att besämma antalet val;
+        boolean success = false;
+        int val = 0;
+        while (!success) {
+            val = readint(keyboard);
+            if (val > 0 && val <= antalVal) {
+                success = true;
+            } else {
+                System.out.println("ange ett tal mellan 1 och " + antalVal);
+            }
+        }
+        Thread.sleep(1000);
+
+        return val;
     }
 }
