@@ -23,12 +23,14 @@ public class Main {
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
         Library library = new Library();
-        menu();
         int val = -999;
-
         
         while (val != 6) {
-            val = val(6,keyboard);
+            menu();
+            try {
+                val = val(6, keyboard);    
+            } catch (Exception e) {
+                //kommer aldrig bli fel
             }
 
             switch (val) {
@@ -37,12 +39,13 @@ public class Main {
 
                     System.out.println("Alla böcker importerade");
 
+
                     break;
 
                 case 2:
                     library.importAllMagazines();
 
-                    System.out.println("Alla tidningar hämtade");
+                    System.out.println("Alla tidningar importerade");
 
                     break;
 
@@ -65,8 +68,11 @@ public class Main {
                 default:
                     break;
             }
-
+            if (val != 6) {
+                backToMenu(keyboard);    
+            }
         }
+
     }
 
     public static void menu() {
@@ -123,5 +129,10 @@ public class Main {
         Thread.sleep(1000);
 
         return val;
+    }
+
+    public static void backToMenu(Scanner keyboard){  //gör så att man ska trycka enter för att gå tillbaka till meny (endast upplevelse)
+        System.out.println("tryck enter för att återgå till meny");
+        keyboard.nextLine();
     }
 }

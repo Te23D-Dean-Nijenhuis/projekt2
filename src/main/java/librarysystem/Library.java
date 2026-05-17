@@ -57,7 +57,7 @@ public class Library {
         }
     }
 
-    // Debug metod
+    // Debug metoder------------------------
     public void printBookCount() {
         System.out.println("Books: " + books.size());
     }
@@ -65,12 +65,24 @@ public class Library {
     public void printMagazineCount() {
         System.out.println("Magazines: " + magazines.size());
     }
-
+//-----------------------------------------
     public ArrayList<Book> getBooks() {
         return books;
     }
 
     public ArrayList<Magazine> getMagazines() {
         return magazines;
+    }
+    //printar ut alla böcker
+    public void printBooks(){
+        for (Book i: books) {
+            System.out.println(i);
+        }
+    }
+    //printar ut alla böcker
+    public void printMagazines(){
+        for (Magazine i: magazines) {
+            System.out.println(i);
+        }
     }
 }
