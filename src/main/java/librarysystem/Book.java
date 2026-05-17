@@ -30,4 +30,10 @@ public class Book extends LibraryItem {
         return pages;
     }
 
+    @Override
+    public String toString() {
+        return "Book [Author=" + Author + ", genre=" + genre + ", pages=" + pages + ", id=" + id + ", title=" + title
+                + ", isAvailable=" + isAvailable + "]";
+    }
+
 }

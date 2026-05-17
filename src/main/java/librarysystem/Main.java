@@ -24,13 +24,13 @@ public class Main {
         Scanner keyboard = new Scanner(System.in);
         Library library = new Library();
         int val = -999;
-        
+
         while (val != 6) {
             menu();
             try {
-                val = val(6, keyboard);    
+                val = val(6, keyboard);
             } catch (Exception e) {
-                //kommer aldrig bli fel
+                // kommer aldrig bli fel
             }
 
             switch (val) {
@@ -38,7 +38,6 @@ public class Main {
                     library.importAllBooks();
 
                     System.out.println("Alla böcker importerade");
-
 
                     break;
 
@@ -50,6 +49,29 @@ public class Main {
                     break;
 
                 case 3:
+                    System.out.println("==================================");
+                    System.out.println("| Meny:                          |");
+                    System.out.println("| Val 1: skriv ut alla böcker.   |");
+                    System.out.println("| Val 2: skriv ut alla tidningar.|");
+                    System.out.println("==================================");
+                    try {
+                        val = val(2, keyboard);
+
+                    } catch (Exception e) {
+                        // kommer ej bli fel
+                    }
+                    switch (val) {
+                        case 1:
+                            library.printBooks();
+                            break;
+
+                        case 2:
+                            library.printMagazines();
+                            break;
+                    
+                        default:
+                            break;
+                    }
 
                     break;
 
@@ -69,7 +91,7 @@ public class Main {
                     break;
             }
             if (val != 6) {
-                backToMenu(keyboard);    
+                backToMenu(keyboard);
             }
         }
 
@@ -131,7 +153,8 @@ public class Main {
         return val;
     }
 
-    public static void backToMenu(Scanner keyboard){  //gör så att man ska trycka enter för att gå tillbaka till meny (endast upplevelse)
+    public static void backToMenu(Scanner keyboard) { // gör så att man ska trycka enter för att gå tillbaka till meny
+                                                      // (endast upplevelse)
         System.out.println("tryck enter för att återgå till meny");
         keyboard.nextLine();
     }

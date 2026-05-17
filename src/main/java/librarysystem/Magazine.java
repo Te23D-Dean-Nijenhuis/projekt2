@@ -24,4 +24,10 @@ public class Magazine extends LibraryItem {
         return publishedYear;
     }
 
+    @Override
+    public String toString() {
+        return "Magazine [issueNumber=" + issueNumber + ", category=" + category + ", publishedYear=" + publishedYear
+                + ", id=" + id + ", title=" + title + ", isAvailable=" + isAvailable + "]";
+    }
+
 }
