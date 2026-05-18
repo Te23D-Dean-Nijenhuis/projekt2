@@ -21,17 +21,14 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner keyboard = new Scanner(System.in);
-        Library library = new Library();
+        Scanner keyboard = new Scanner(System.in);  //skapar ny scanner som läser in input i konsolen
+        Library library = new Library();              //skapar en instans av biblioteket
         int val = -999;
 
         while (val != 6) {
-            menu();
-            try {
-                val = val(6, keyboard);
-            } catch (Exception e) {
-                // kommer aldrig bli fel
-            }
+            mainMenu();
+            val(6,keyboard);
+           
 
             switch (val) {
                 case 1:
@@ -48,18 +45,10 @@ public class Main {
 
                     break;
 
-                case 3:
-                    System.out.println("==================================");
-                    System.out.println("| Meny:                          |");
-                    System.out.println("| Val 1: skriv ut alla böcker.   |");
-                    System.out.println("| Val 2: skriv ut alla tidningar.|");
-                    System.out.println("==================================");
-                    try {
-                        val = val(2, keyboard);
-
-                    } catch (Exception e) {
-                        // kommer ej bli fel
-                    }
+                case 3: // Skriva ut saker
+                    printMenu();
+                    val(2,keyboard);
+                    
                     switch (val) {
                         case 1:
                             library.printBooks();
@@ -68,7 +57,7 @@ public class Main {
                         case 2:
                             library.printMagazines();
                             break;
-                    
+
                         default:
                             break;
                     }
@@ -99,7 +88,18 @@ public class Main {
 
     }
 
-    public static void menu() {
+    // Meny metoderna är här för att detblir mycket enklare att läsa och ändra i
+    // koden när dem inte är där uppe
+
+    public static void printMenu() {  //meny för när man vill skriva ut
+        System.out.println("==================================");
+        System.out.println("| Meny:                          |");
+        System.out.println("| Val 1: skriv ut alla böcker.   |");
+        System.out.println("| Val 2: skriv ut alla tidningar.|");
+        System.out.println("==================================");
+    }
+
+    public static void mainMenu() { //main menyn
         System.out.println("==========================================");
         System.out.println("| Meny:                                  |");
         System.out.println("| Val 1: Hämta böcker.                   |");
@@ -137,7 +137,7 @@ public class Main {
 
     }
 
-    public static int val(int antalVal, Scanner keyboard) throws InterruptedException { // dyanamisk val metod där det
+    public static int val(int antalVal, Scanner keyboard){ // dyanamisk val metod där det
         // går att besämma antalet val;
         boolean success = false;
         int val = 0;
@@ -149,7 +149,12 @@ public class Main {
                 System.out.println("ange ett tal mellan 1 och " + antalVal);
             }
         }
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+            
+        } catch (Exception e) {
+            // kommer ej bli fel
+        }
 
         return val;
     }
