@@ -47,6 +47,9 @@ public class Main {
                                     break;
 
                                 case 2:
+                                    library.importBookById("5");
+
+                                    library.printBooks();
                                     
                                     break;
                             

@@ -46,7 +46,7 @@ public class Library {
         }
     }
 
-    public Book importBookById(String id) { //hämta en bok från server utifrån id
+    public void importBookById(String id) { //hämta en bok från server utifrån id
         HttpResponse<String> response = Unirest.get(baseUrl + "books/" + id).asString();
 
         String json_data = response.getBody();
@@ -55,7 +55,7 @@ public class Library {
 
         Book e = gson.fromJson(json_data, type);
 
-        return e;
+        books.add(e);
     }
 
     // hämta magazines från API
