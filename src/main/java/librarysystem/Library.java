@@ -277,12 +277,28 @@ public class Library {
         System.out.println("Ange antal sidor:");
         int pages = Main.readInt(keyboard);
 
-        Book e = new Book(null, title, isAvailable, author, genre, pages);
+        Book a = new Book(null, title, isAvailable, author, genre, pages);
 
-        HttpResponse<String> response = Unirest.post(baseUrl + "books")
-                .header("Content-type", "application/json")
-                .body(gson.toJson(e))
-                .asString();
+        HttpResponse<String> response;
+        String jsonBody = gson.toJson(a);
+        try {
+            response = Unirest.post(baseUrl + "books")
+                    .header("Content-type", "application/json")
+                    .body(jsonBody)
+                    .asString();
+            
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
+
+        if(response.getStatus() != 200 && response.getStatus() != 201){
+            System.out.println("Error kod" + response.getStatus());
+            return;
+        }
+        System.out.println("Sparat på servern: " + gson.fromJson(response.getBody(), Book.class));
+
+
     }
 
     public void addMagazine(Scanner keyboard) {
