@@ -1,3 +1,8 @@
+/*
+Dean Nijenhuis TE23D
+Denna klassen är biblioteks klassen, den innehåller den centrala funktionaliteten för biblioteket
+ */
+
 package librarysystem;
 
 import java.lang.reflect.Type;

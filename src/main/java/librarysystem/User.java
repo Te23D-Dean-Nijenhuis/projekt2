@@ -1,3 +1,8 @@
+/*
+Dean Nijenhuis TE23D
+denna klassen är användar objektet
+*/
+
 package librarysystem;
 
 public class User {

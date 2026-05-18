@@ -1,3 +1,10 @@
+/*
+Dean Nijenhuis TE23D
+Denna klassen är tidnings objektet
+*/
+
+
+
 package librarysystem;
 
 public class Magazine extends LibraryItem {

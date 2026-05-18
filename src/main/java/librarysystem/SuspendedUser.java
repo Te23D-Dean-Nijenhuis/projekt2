@@ -1,3 +1,9 @@
+/*
+Dean Nijenhuis TE23D
+Denna klassen är objektet för suspended users
+*/
+
+
 package librarysystem;
 
 public class SuspendedUser {
