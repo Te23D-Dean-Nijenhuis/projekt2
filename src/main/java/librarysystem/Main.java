@@ -41,9 +41,9 @@ public class Main {
                             switch (choice) {
                                 case 1:
                                     library.importAllBooks();
-        
+
                                     System.out.println("Alla böcker importerade");
-                                    
+
                                     break;
 
                                 case 2:
@@ -51,14 +51,11 @@ public class Main {
 
                                     library.importBookById(readString(keyboard)); // hämtar bok efter id som string
 
-                                    library.printBooks();
-                                    
                                     break;
-                            
+
                                 default:
                                     break;
                             }
-
 
                             break;
                         case 2:
@@ -67,54 +64,72 @@ public class Main {
 
                             switch (choice) {
                                 case 1:
-                                    
+                                    library.importAllMagazines();
+
+                                    System.out.println("Alla tidningar importerade");
+
                                     break;
 
                                 case 2:
-                                    
+                                    System.out.println("Ange id för vilken tidning du vill hämta:");
+
+                                    library.importMagazineById(readString(keyboard)); // hämtar tidning efter id som
+                                                                                      // string
+
                                     break;
-                            
+
                                 default:
                                     break;
                             }
 
-                            // library.importAllMagazines();
-
-                            // System.out.println("Alla tidningar importerade");
-
                             break;
 
                         case 3:
+                            userFetchMenu();
+                            choice = choice(2, keyboard);
 
-                        switch (choice) {
-                            case 1:
-                                
-                                break;
+                            switch (choice) {
+                                case 1:
+                                        library.importAllUsers();
 
-                            case 2:
-                                
-                                break;
-                        
-                            default:
-                                break;
-                        }
+                                        System.out.println("Alla användare importerade");
+                                    break;
+
+                                case 2:
+                                    System.out.println("Ange id för användare du vill hitta: ");
+
+                                    library.importUserById(readString(keyboard));
+
+                                    break;
+
+                                default:
+                                    break;
+                            }
 
                             break;
 
                         case 4:
+                            suspendedFetchMenu();
+                            choice = choice(2, keyboard);
 
-                        switch (choice) {
-                            case 1:
-                                
-                                break;
+                            switch (choice) {
+                                case 1:
+                                    library.importAllUsers();
 
-                            case 2:
-                                
-                                break;
-                        
-                            default:
-                                break;
-                        }
+                                    System.out.println("Alla avstängda användare importerade.");
+
+                                    break;
+
+                                case 2:
+                                    System.out.println("Ange id för avstängda användaren: ");
+
+                                    library.importSuspendedById(readString(keyboard)); 
+
+                                    break;
+
+                                default:
+                                    break;
+                            }
 
                             break;
 
@@ -181,13 +196,31 @@ public class Main {
         System.out.println("=============================");
     }
 
-    public static void magazineFetchMenu() { //hämta tidningar på olika sätt
+    public static void magazineFetchMenu() { // hämta tidningar på olika sätt
         System.out.println("=================================");
         System.out.println("| Meny:                         |");
         System.out.println("| Val 1: hämta alla tidningar.  |");
         System.out.println("| Val 2: hämta specifik tidning.|");
         System.out.println("| Skriv 1-2.                    |");
         System.out.println("=================================");
+    }
+
+    public static void userFetchMenu() { // hämta tidningar på olika sätt
+        System.out.println("===================================");
+        System.out.println("| Meny:                           |");
+        System.out.println("| Val 1: hämta alla användare.    |");
+        System.out.println("| Val 2: hämta specifik användare.|");
+        System.out.println("| Skriv 1-2.                      |");
+        System.out.println("===================================");
+    }
+
+    public static void suspendedFetchMenu() { // hämta tidningar på olika sätt
+        System.out.println("==================================");
+        System.out.println("| Meny:                          |");
+        System.out.println("| Val 1: hämta alla avstängda.   |");
+        System.out.println("| Val 2: hämta specifik avstängd.|");
+        System.out.println("| Skriv 1-2.                     |");
+        System.out.println("==================================");
     }
 
     public static void fetchMenu() { // menyn när man ska hämta olika saker från server
@@ -197,17 +230,17 @@ public class Main {
         System.out.println("| Val 2: hämta tidningar.     |");
         System.out.println("| val 3: hämta användare.     |");
         System.out.println("| val 4: hämta avstängda.     |");
-        System.out.println("| Skriv 1-3.                  |");
+        System.out.println("| Skriv 1-4.                  |");
         System.out.println("===============================");
     }
 
-    public static void printMenu() { // meny för när man vill skriva ut
-        System.out.println("==================================");
-        System.out.println("| Meny:                          |");
-        System.out.println("| Val 1: skriv ut alla böcker.   |");
-        System.out.println("| Val 2: skriv ut alla tidningar.|");
-        System.out.println("| Skriv 1-2.                     |");
-        System.out.println("==================================");
+    public static void printSortMenu() { // meny för att välja ifall man vill skriva ut sorterat eller inte.
+        System.out.println("==============================");
+        System.out.println("| Meny:                      |");
+        System.out.println("| Val 1: skriv ut o-sorterat.|");
+        System.out.println("| Val 2: skriv ut sorterat.  |");
+        System.out.println("| Skriv 1-2.                 |");
+        System.out.println("==============================");
     }
 
     public static void mainMenu() { // main menyn
@@ -226,7 +259,7 @@ public class Main {
     public static String readString(Scanner keyboard) { // gör som namnet heter
         String temp = "sfjsifj"; // blev ibland problem när stringen var nullad
 
-        temp = keyboard.next();
+        temp = keyboard.nextLine();
         return temp;
     }
 

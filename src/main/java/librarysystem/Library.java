@@ -23,11 +23,15 @@ public class Library {
 
     private ArrayList<Book> books;
     private ArrayList<Magazine> magazines;
+    private ArrayList<User> users;
+    private ArrayList<SuspendedUser> suspended;
 
     // Constructor
     public Library() {
         this.books = new ArrayList<>();
         this.magazines = new ArrayList<>();
+        this.users = new ArrayList<>();
+        this.suspended = new ArrayList<>();
     }
 
     // hämta böcker från API
@@ -47,42 +51,6 @@ public class Library {
         }
     }
 
-    public void importBookById(String id) { // hämta en bok från server utifrån id
-        HttpResponse<String> response = Unirest.get(baseUrl + "books/" + id).asString();
-
-        String json_data = response.getBody();
-
-        Type type = new TypeToken<Book>() {
-        }.getType();
-
-        if (response.getStatus() == 200) { // checkar att status koden är 200 innan den lägger till annars blir det ett
-                                           // tomt obejekt
-            Book e = gson.fromJson(json_data, type);
-            books.add(e);
-        } else {
-            System.out.println("Denna boken finns inte!");
-        }
-
-    }
-
-    public void importMagazineById(String id) { // hämta en tidning från server utifrån id
-        HttpResponse<String> response = Unirest.get(baseUrl + "books/" + id).asString();
-
-        String json_data = response.getBody();
-
-        Type type = new TypeToken<Book>() {
-        }.getType();
-
-        if (response.getStatus() == 200) { // checkar att status koden är 200 innan den lägger till annars blir det ett
-                                           // tomt obejekt
-            Magazine e = gson.fromJson(json_data, type);
-            magazines.add(e);
-        } else {
-            System.out.println("Denna boken finns inte!");
-        }
-
-    }
-
     // hämta magazines från API
     public void importAllMagazines() {
 
@@ -99,6 +67,115 @@ public class Library {
             magazines = new ArrayList<>();
         }
     }
+
+    public void importAllUsers() {
+
+        HttpResponse<String> response = Unirest.get(baseUrl + "users").asString();
+
+        String json_data = response.getBody();
+
+        Type type = new TypeToken<ArrayList<User>>() {
+        }.getType();
+
+        users = gson.fromJson(json_data, type);
+
+        if (users == null) {
+            users = new ArrayList<>();
+        }
+    }
+
+    public void importAllSuspended() {
+
+        HttpResponse<String> response = Unirest.get(baseUrl + "suspended").asString();
+
+        String json_data = response.getBody();
+
+        Type type = new TypeToken<ArrayList<SuspendedUser>>() {
+        }.getType();
+
+        suspended = gson.fromJson(json_data, type);
+
+        if (suspended == null) {
+            suspended = new ArrayList<>();
+        }
+    }
+
+    public void importBookById(String id) { // hämta en bok från server utifrån id
+        HttpResponse<String> response = Unirest.get(baseUrl + "books/" + id).asString();
+
+        String json_data = response.getBody();
+
+        Type type = new TypeToken<Book>() {
+        }.getType();
+        
+        if (response.getStatus() == 200) { // checkar att status koden är 200 innan den lägger till annars blir det ett
+            // tomt obejekt
+            Book e = gson.fromJson(json_data, type);
+            books.add(e);
+            System.out.println("Hämtade boken: " + e);
+        } else {
+            System.out.println("Denna boken finns inte!");
+        }
+
+    }
+
+    public void importMagazineById(String id) { // hämta en tidning från server utifrån id
+        HttpResponse<String> response = Unirest.get(baseUrl + "magazines/" + id).asString();
+
+        String json_data = response.getBody();
+
+        Type type = new TypeToken<Magazine>() {
+        }.getType();
+
+        if (response.getStatus() == 200) { // checkar att status koden är 200 innan den lägger till annars blir det ett
+                                           // tomt obejekt
+            Magazine e = gson.fromJson(json_data, type);
+            magazines.add(e);
+            System.out.println("Hämtade tidningen: " + e);
+        } else {
+            System.out.println("Denna tidningen finns inte!");
+        }
+
+    }
+
+    public void importUserById(String id) { // hämta en tidning från server utifrån id
+        HttpResponse<String> response = Unirest.get(baseUrl + "users/" + id).asString();
+
+        String json_data = response.getBody();
+
+        Type type = new TypeToken<User>() {
+        }.getType();
+
+        if (response.getStatus() == 200) { // checkar att status koden är 200 innan den lägger till annars blir det ett
+                                           // tomt obejekt
+            User e = gson.fromJson(json_data, type);
+            users.add(e);
+            System.out.println("Hämtade användaren: " + e);
+        } else {
+            System.out.println("Denna användaren finns inte!");
+        }
+
+    }
+
+    public void importSuspendedById(String id) { // hämta en tidning från server utifrån id
+        HttpResponse<String> response = Unirest.get(baseUrl + "suspended/" + id).asString();
+
+        String json_data = response.getBody();
+
+        Type type = new TypeToken<SuspendedUser>() {
+        }.getType();
+
+        if (response.getStatus() == 200) { // checkar att status koden är 200 innan den lägger till annars blir det ett
+                                           // tomt obejekt
+            SuspendedUser e = gson.fromJson(json_data, type);
+            suspended.add(e);
+            System.out.println("Hämtade avstängda användaren: " + e);
+        } else {
+            System.out.println("Denna avstängda användaren finns inte!");
+        }
+
+    }
+
 
     // Debug metoder------------------------
     public void printBookCount() {
