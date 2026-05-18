@@ -7,6 +7,8 @@ package librarysystem;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,6 +28,10 @@ public class Library {
     private ArrayList<Magazine> magazines;
     private ArrayList<User> users;
     private ArrayList<SuspendedUser> suspended;
+    private Map<String, Book> bookMap;
+    private Map<String, Magazine> magazineMap;
+    private Map<String, User> userMap;
+    private Map<String, SuspendedUser> suspendedMap;
 
     // Constructor
     public Library() {
@@ -33,9 +39,14 @@ public class Library {
         this.magazines = new ArrayList<>();
         this.users = new ArrayList<>();
         this.suspended = new ArrayList<>();
+        this.bookMap = new HashMap<>();
+        this.magazineMap = new HashMap<>();
+        this.userMap = new HashMap<>();
+        this.suspendedMap = new HashMap<>();
     }
 
-    // hämta böcker från API
+    // importera all ------------------------------
+
     public void importAllBooks() {
         HttpResponse<String> response;
         try {
@@ -56,9 +67,11 @@ public class Library {
         if (books == null) {
             books = new ArrayList<>();
         }
+        for (Book i : books) {
+            bookMap.put(i.getTitle().toLowerCase(), i);
+        }
     }
 
-    // hämta magazines från API
     public void importAllMagazines() {
         HttpResponse<String> response;
         try {
@@ -78,6 +91,9 @@ public class Library {
 
         if (magazines == null) {
             magazines = new ArrayList<>();
+        }
+        for (Magazine i : magazines) {
+            magazineMap.put(i.getTitle().toLowerCase(), i);
         }
     }
 
@@ -101,6 +117,9 @@ public class Library {
         if (users == null) {
             users = new ArrayList<>();
         }
+        for (User i : users) {
+            userMap.put(i.getEmail().toLowerCase(), i);
+        }
     }
 
     public void importAllSuspended() {
@@ -123,7 +142,14 @@ public class Library {
         if (suspended == null) {
             suspended = new ArrayList<>();
         }
+        for (SuspendedUser i : suspended) {
+            suspendedMap.put(i.getId().toLowerCase(), i);
+        }
     }
+
+    // importera all ------------------------------
+
+    // importera id -------------------------------
 
     public void importBookById(String id) { // hämta en bok från server utifrån id
         HttpResponse<String> response;
@@ -144,6 +170,7 @@ public class Library {
             // tomt obejekt
             Book e = gson.fromJson(json_data, type);
             books.add(e);
+            bookMap.put(e.getTitle().toLowerCase(), e);
             System.out.println("Hämtade boken: " + e);
         } else {
             System.out.println("Denna boken finns inte!");
@@ -170,6 +197,7 @@ public class Library {
                                            // tomt obejekt
             Magazine e = gson.fromJson(json_data, type);
             magazines.add(e);
+            magazineMap.put(e.getTitle().toLowerCase(), e);
             System.out.println("Hämtade tidningen: " + e);
         } else {
             System.out.println("Denna tidningen finns inte!");
@@ -196,6 +224,7 @@ public class Library {
                                            // tomt obejekt
             User e = gson.fromJson(json_data, type);
             users.add(e);
+            userMap.put(e.getEmail().toLowerCase(), e);
             System.out.println("Hämtade användaren: " + e);
         } else {
             System.out.println("Denna användaren finns inte!");
@@ -222,12 +251,15 @@ public class Library {
                                            // tomt obejekt
             SuspendedUser e = gson.fromJson(json_data, type);
             suspended.add(e);
+            suspendedMap.put(e.getId().toLowerCase(), e);
             System.out.println("Hämtade avstängda användaren: " + e);
         } else {
             System.out.println("Denna avstängda användaren finns inte!");
         }
 
     }
+
+    // importera id -------------------------------
 
     // Debug metoder------------------------
     public void printBookCount() {
@@ -262,6 +294,8 @@ public class Library {
         }
     }
 
+    // skapa saker ----------------------------------------
+
     public void addBook(Scanner keyboard) {
         System.out.println("Ange titel:");
         String title = Main.readString(keyboard);
@@ -277,7 +311,7 @@ public class Library {
         System.out.println("Ange antal sidor:");
         int pages = Main.readInt(keyboard);
 
-        Book a = new Book(null, title, isAvailable, author, genre, pages);
+        Book a = new Book("0", title, isAvailable, author, genre, pages);
 
         HttpResponse<String> response;
         String jsonBody = gson.toJson(a);
@@ -286,39 +320,121 @@ public class Library {
                     .header("Content-type", "application/json")
                     .body(jsonBody)
                     .asString();
-            
+
         } catch (UnirestException e) {
             System.out.println("Error: " + e.getLocalizedMessage());
             return;
         }
 
-        if(response.getStatus() != 200 && response.getStatus() != 201){
+        if (response.getStatus() != 200 && response.getStatus() != 201) {
             System.out.println("Error kod" + response.getStatus());
             return;
         }
         System.out.println("Sparat på servern: " + gson.fromJson(response.getBody(), Book.class));
 
-
     }
 
     public void addMagazine(Scanner keyboard) {
-        String id = Integer.toString(magazines.size() + 1);
 
         System.out.println("Ange titel:");
         String title = Main.readString(keyboard);
 
         boolean isAvailable = true;
 
-        System.out.println("Ange upplaga:");
+        System.out.println("Ange issue number:");
         int issueNumber = Main.readInt(keyboard);
 
         System.out.println("Ange kategori:");
         String category = Main.readString(keyboard);
 
-        System.out.println("Ange år:");
+        System.out.println("Ange publiceringsår:");
         int publishedYear = Main.readInt(keyboard);
 
-        Magazine e = new Magazine(id, title, isAvailable, issueNumber, category, publishedYear);
-        magazines.add(e);
+        Magazine m = new Magazine("0", title, isAvailable, issueNumber, category, publishedYear);
+
+        HttpResponse<String> response;
+
+        try {
+            response = Unirest.post(baseUrl + "magazines")
+                    .header("Content-Type", "application/json")
+                    .body(gson.toJson(m))
+                    .asString();
+
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
+
+        if (response.getStatus() != 200 && response.getStatus() != 201) {
+            System.out.println("Error kod " + response.getStatus());
+            return;
+        }
+
+        System.out.println("Sparat på servern: " +
+                gson.fromJson(response.getBody(), Magazine.class));
     }
+
+    public void addUser(Scanner keyboard) {
+
+        System.out.println("Ange namn:");
+        String name = Main.readString(keyboard);
+
+        System.out.println("Ange email:");
+        String email = Main.readString(keyboard);
+
+        User u = new User("0", name, email);
+
+        HttpResponse<String> response;
+
+        try {
+            response = Unirest.post(baseUrl + "users")
+                    .header("Content-Type", "application/json")
+                    .body(gson.toJson(u))
+                    .asString();
+
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
+
+        if (response.getStatus() != 200 && response.getStatus() != 201) {
+            System.out.println("Error kod " + response.getStatus());
+            return;
+        }
+
+        System.out.println("Sparat på servern: " +
+                gson.fromJson(response.getBody(), User.class));
+    }
+
+    public void addSuspendedUser(Scanner keyboard) {
+
+        System.out.println("Ange userId:");
+        String userId = Main.readString(keyboard);
+
+        SuspendedUser s = new SuspendedUser("0", userId);
+
+        HttpResponse<String> response;
+
+        try {
+            response = Unirest.post(baseUrl + "suspended")
+                    .header("Content-Type", "application/json")
+                    .body(gson.toJson(s))
+                    .asString();
+
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
+
+        if (response.getStatus() != 200 && response.getStatus() != 201) {
+            System.out.println("Error kod " + response.getStatus());
+            return;
+        }
+
+        System.out.println("Sparat på servern: " +
+                gson.fromJson(response.getBody(), SuspendedUser.class));
+    }
+
+    // skapa saker ----------------------------------------
+
 }

@@ -153,10 +153,12 @@ public class Main {
                             break;
 
                         case 3:
+                            library.addUser(keyboard);
 
                             break;
 
                         case 4:
+                            library.addSuspendedUser(keyboard);
 
                             break;
 
@@ -166,36 +168,35 @@ public class Main {
 
                     break;
 
-                case 3: // Skriva ut saker
-                    printSortMenu();
-                    choice = choice(2, keyboard);
-
-                    switch (choice) {
-                        case 1:
-                            library.printBooks();
-                            break;
-
-                        case 2:
-                            library.printMagazines();
-                            break;
-
-                        default:
-                            break;
-                    }
+                case 3: 
 
                     break;
 
                 case 4:
-                    
 
                     break;
 
                 case 5:
-                 
 
                     break;
 
                 case 6:
+                    // Skriva ut saker
+                    // printSortMenu();
+                    // choice = choice(2, keyboard);
+
+                    // switch (choice) {
+                    // case 1:
+                    // library.printBooks();
+                    // break;
+
+                    // case 2:
+                    // library.printMagazines();
+                    // break;
+
+                    // default:
+                    // break;
+                    // }
 
                     break;
 
@@ -216,8 +217,8 @@ public class Main {
         System.out.println("==========================================");
         System.out.println("| Meny:                                  |");
         System.out.println("| Val 1: Hämta från servern.             |");
-        System.out.println("| Val 2: Skapa nytt objekt.              |");
-        System.out.println("| Val 3: Skriv ut hämtade artiklar.      |");
+        System.out.println("| Val 2: Skapa bok/tidning/användare.    |");
+        System.out.println("| Val 3: Hitta bok/tidning/användare.    |");
         System.out.println("| Val 4: Lägg till en bok i systemet.    |");
         System.out.println("| Val 5: Lägg till en tidning i systemet.|");
         System.out.println("| Val 6: Avsluta programmet.             |");
@@ -285,7 +286,7 @@ public class Main {
         System.out.println("OBS!!! det du lägger till hamnar endast\n i servern och måste sedan importeras");
         System.out.println("====================================");
         System.out.println("| Meny:                            |");
-        System.out.println("| Val 1: Lägg till en ny bok.    |");
+        System.out.println("| Val 1: Lägg till en ny bok.      |");
         System.out.println("| Val 2: Lägg till en ny tidning.  |");
         System.out.println("| Val 3: Lägg till en ny användare.|");
         System.out.println("| Val 4: Lägg till en ny avstängd. |");
@@ -295,23 +296,42 @@ public class Main {
 
     // case 2 menyer
     // -----------------------------------------------------------------------------
-
+    
+    // case 3 menyer
+    // -----------------------------------------------------------------------------
+    public static void findMenu() {
+        System.out.println("====================================");
+        System.out.println("| Meny:                            |");
+        System.out.println("| Val 1: Hitta bok med titel.      |");
+        System.out.println("| Val 2: Hitta tidning med titel.  |");
+        System.out.println("| Val 3: Hitta användare med email.|");
+        System.out.println("| Val 4: Hitta avstängd med id.    |");
+        System.out.println("| Skriv 1-4.                       |");
+        System.out.println("====================================");
+    }
+        
+    
+    // case 3 menyer
+    // -----------------------------------------------------------------------------
+    
     public static void printSortMenu() { // meny för att välja ifall man vill skriva ut sorterat eller inte.
-        System.out.println("==============================");
+    System.out.println("==============================");
         System.out.println("| Meny:                      |");
         System.out.println("| Val 1: skriv ut o-sorterat.|");
         System.out.println("| Val 2: skriv ut sorterat.  |");
         System.out.println("| Skriv 1-2.                 |");
         System.out.println("==============================");
     }
-
+    
+    
+    
     public static String readString(Scanner keyboard) { // gör som namnet heter
         String temp = "sfjsifj"; // blev ibland problem när stringen var nullad
 
         temp = keyboard.nextLine();
         return temp;
     }
-
+    
     public static int readInt(Scanner keyboard) { // gör som namnet heter
         int temp = 0;
         boolean success = false;
