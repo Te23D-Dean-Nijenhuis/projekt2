@@ -21,34 +21,45 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner keyboard = new Scanner(System.in);  //skapar ny scanner som läser in input i konsolen
-        Library library = new Library();              //skapar en instans av biblioteket
+        Scanner keyboard = new Scanner(System.in); // skapar ny scanner som läser in input i konsolen
+        Library library = new Library(); // skapar en instans av biblioteket
         int val = -999;
 
         while (val != 6) {
             mainMenu();
-            val(6,keyboard);
-           
+            val(6, keyboard);
 
             switch (val) {
                 case 1:
-                    library.importAllBooks();
+                    fetchMenu();
+                    val = val(2, keyboard);
 
-                    System.out.println("Alla böcker importerade");
+                    switch (val) {
+                        case 1:
+                            library.importAllBooks();
 
-                    break;
+                            System.out.println("Alla böcker importerade");
+
+                            break;
+                        case 2:
+                            library.importAllMagazines();
+        
+                            System.out.println("Alla tidningar importerade");
+
+                            break;
+
+                        default:
+                            break;
+                    }
 
                 case 2:
-                    library.importAllMagazines();
-
-                    System.out.println("Alla tidningar importerade");
 
                     break;
 
                 case 3: // Skriva ut saker
                     printMenu();
-                    val(2,keyboard);
-                    
+                    val(2, keyboard);
+
                     switch (val) {
                         case 1:
                             library.printBooks();
@@ -91,19 +102,29 @@ public class Main {
     // Meny metoderna är här för att detblir mycket enklare att läsa och ändra i
     // koden när dem inte är där uppe
 
-    public static void printMenu() {  //meny för när man vill skriva ut
+    public static void fetchMenu() { // menyn när man ska hämta böcker och tidningar från servern
+        System.out.println("===============================");
+        System.out.println("| Meny:                       |");
+        System.out.println("| Val 1: hämta alla böcker   .|");
+        System.out.println("| Val 2: hämta alla tidningar.|");
+        System.out.println("| Skriv 1-2.                  |");
+        System.out.println("==============================");
+    }
+
+    public static void printMenu() { // meny för när man vill skriva ut
         System.out.println("==================================");
         System.out.println("| Meny:                          |");
         System.out.println("| Val 1: skriv ut alla böcker.   |");
         System.out.println("| Val 2: skriv ut alla tidningar.|");
+        System.out.println("| Skriv 1-2.                     |");
         System.out.println("==================================");
     }
 
-    public static void mainMenu() { //main menyn
+    public static void mainMenu() { // main menyn
         System.out.println("==========================================");
         System.out.println("| Meny:                                  |");
-        System.out.println("| Val 1: Hämta böcker.                   |");
-        System.out.println("| Val 2: Hämta tidningar.                |");
+        System.out.println("| Val 1: Hämta böcker/tidningar.         |");
+        System.out.println("| Val 2: Hämta tidningar.     asdasd     |");
         System.out.println("| Val 3: Skriv ut hämtade artiklar.      |");
         System.out.println("| Val 4: Lägg till en bok i systemet.    |");
         System.out.println("| Val 5: Lägg till en tidning i systemet.|");
@@ -137,7 +158,7 @@ public class Main {
 
     }
 
-    public static int val(int antalVal, Scanner keyboard){ // dyanamisk val metod där det
+    public static int val(int antalVal, Scanner keyboard) { // dyanamisk val metod där det
         // går att besämma antalet val;
         boolean success = false;
         int val = 0;
@@ -151,7 +172,7 @@ public class Main {
         }
         try {
             Thread.sleep(1000);
-            
+
         } catch (Exception e) {
             // kommer ej bli fel
         }
