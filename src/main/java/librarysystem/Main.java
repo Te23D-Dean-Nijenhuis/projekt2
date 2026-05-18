@@ -47,7 +47,9 @@ public class Main {
                                     break;
 
                                 case 2:
-                                    library.importBookById("5");
+                                    System.out.println("Ange id för vilken bok du vill hämta:");
+
+                                    library.importBookById(readString(keyboard)); // hämtar bok efter id som string
 
                                     library.printBooks();
                                     

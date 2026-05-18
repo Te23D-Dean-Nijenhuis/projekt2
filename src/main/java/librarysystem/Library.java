@@ -37,7 +37,8 @@ public class Library {
 
         String json_data = response.getBody();
 
-        Type type = new TypeToken<ArrayList<Book>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Book>>() {
+        }.getType();
 
         books = gson.fromJson(json_data, type);
 
@@ -46,16 +47,40 @@ public class Library {
         }
     }
 
-    public void importBookById(String id) { //hämta en bok från server utifrån id
+    public void importBookById(String id) { // hämta en bok från server utifrån id
         HttpResponse<String> response = Unirest.get(baseUrl + "books/" + id).asString();
 
         String json_data = response.getBody();
 
-        Type type = new TypeToken<Book>() {}.getType();
+        Type type = new TypeToken<Book>() {
+        }.getType();
 
-        Book e = gson.fromJson(json_data, type);
+        if (response.getStatus() == 200) { // checkar att status koden är 200 innan den lägger till annars blir det ett
+                                           // tomt obejekt
+            Book e = gson.fromJson(json_data, type);
+            books.add(e);
+        } else {
+            System.out.println("Denna boken finns inte!");
+        }
 
-        books.add(e);
+    }
+
+    public void importMagazineById(String id) { // hämta en tidning från server utifrån id
+        HttpResponse<String> response = Unirest.get(baseUrl + "books/" + id).asString();
+
+        String json_data = response.getBody();
+
+        Type type = new TypeToken<Book>() {
+        }.getType();
+
+        if (response.getStatus() == 200) { // checkar att status koden är 200 innan den lägger till annars blir det ett
+                                           // tomt obejekt
+            Magazine e = gson.fromJson(json_data, type);
+            magazines.add(e);
+        } else {
+            System.out.println("Denna boken finns inte!");
+        }
+
     }
 
     // hämta magazines från API
