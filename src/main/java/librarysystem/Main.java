@@ -23,28 +23,42 @@ public class Main {
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in); // skapar ny scanner som läser in input i konsolen
         Library library = new Library(); // skapar en instans av biblioteket
-        int val = -999;
+        int choice = -999;
 
-        while (val != 6) {
+        while (choice != 6) {
             mainMenu();
-            val(6, keyboard);
+            choice = choice(6, keyboard);
 
-            switch (val) {
+            switch (choice) {
                 case 1:
                     fetchMenu();
-                    val = val(2, keyboard);
+                    choice = choice(4, keyboard);
 
-                    switch (val) {
+                    switch (choice) {
                         case 1:
-                            library.importAllBooks();
+                            bookFetchMenu();
+                            choice = choice(2, keyboard);
 
-                            System.out.println("Alla böcker importerade");
+                            // library.importAllBooks();
+
+                            // System.out.println("Alla böcker importerade");
 
                             break;
                         case 2:
-                            library.importAllMagazines();
-        
-                            System.out.println("Alla tidningar importerade");
+                            magazineFetchMenu();
+                            choice = choice(2, keyboard);
+
+                            // library.importAllMagazines();
+
+                            // System.out.println("Alla tidningar importerade");
+
+                            break;
+
+                        case 3:
+
+                            break;
+
+                        case 4:
 
                             break;
 
@@ -58,9 +72,9 @@ public class Main {
 
                 case 3: // Skriva ut saker
                     printMenu();
-                    val(2, keyboard);
+                    choice = choice(2, keyboard);
 
-                    switch (val) {
+                    switch (choice) {
                         case 1:
                             library.printBooks();
                             break;
@@ -92,7 +106,7 @@ public class Main {
                 default:
                     break;
             }
-            if (val != 6) {
+            if (choice != 6) {
                 backToMenu(keyboard);
             }
         }
@@ -102,13 +116,32 @@ public class Main {
     // Meny metoderna är här för att detblir mycket enklare att läsa och ändra i
     // koden när dem inte är där uppe
 
+    public static void bookFetchMenu() { // hämta böcker på olika sätt
+        System.out.println("=============================");
+        System.out.println("| Meny:                     |");
+        System.out.println("| Val 1: hämta alla böcker. |");
+        System.out.println("| Val 2: hämta specifik bok.|");
+        System.out.println("| Skriv 1-2.                |");
+        System.out.println("=============================");
+    }
+
+    public static void magazineFetchMenu() { //hämta tidningar på olika sätt
+        System.out.println("=================================");
+        System.out.println("| Meny:                         |");
+        System.out.println("| Val 1: hämta alla tidningar.  |");
+        System.out.println("| Val 2: hämta specifik tidning.|");
+        System.out.println("| Skriv 1-2.                    |");
+        System.out.println("=================================");
+    }
+
     public static void fetchMenu() { // menyn när man ska hämta olika saker från server
         System.out.println("===============================");
         System.out.println("| Meny:                       |");
         System.out.println("| Val 1: hämta böcker.        |");
         System.out.println("| Val 2: hämta tidningar.     |");
-        System.out.println("| val 3: hämta användare      |");
-        System.out.println("| Skriv 1-2.                  |");
+        System.out.println("| val 3: hämta användare.     |");
+        System.out.println("| val 4: hämta avstängda.     |");
+        System.out.println("| Skriv 1-3.                  |");
         System.out.println("===============================");
     }
 
@@ -159,16 +192,16 @@ public class Main {
 
     }
 
-    public static int val(int antalVal, Scanner keyboard) { // dyanamisk val metod där det
+    public static int choice(int numberChoices, Scanner keyboard) { // dyanamisk val metod där det
         // går att besämma antalet val;
         boolean success = false;
-        int val = 0;
+        int choice = 0;
         while (!success) {
-            val = readInt(keyboard);
-            if (val > 0 && val <= antalVal) {
+            choice = readInt(keyboard);
+            if (choice > 0 && choice <= numberChoices) {
                 success = true;
             } else {
-                System.out.println("ange ett tal mellan 1 och " + antalVal);
+                System.out.println("ange ett tal mellan 1 och " + numberChoices);
             }
         }
         try {
@@ -178,7 +211,7 @@ public class Main {
             // kommer ej bli fel
         }
 
-        return val;
+        return choice;
     }
 
     public static void backToMenu(Scanner keyboard) { // gör så att man ska trycka enter för att gå tillbaka till meny
