@@ -7,6 +7,7 @@ package librarysystem;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -398,6 +399,37 @@ public class Library {
     }
 
     // ta bort saker -------------------------------
+
+    // skriv ut saker
+
+    public void printSortedBooks() {
+        ArrayList<Book> e = new ArrayList<>(books);
+        Collections.sort(e);
+
+        for (Book i : e) {
+            System.out.println(i);            
+        }
+    }
+
+    public void printSortedMagazines() {
+        ArrayList<Magazine> e = new ArrayList<>(magazines);
+        Collections.sort(e);
+
+        for (Magazine i : e) {
+            System.out.println(i);            
+        }
+    }
+
+    public void printSortedUsers() {
+        ArrayList<User> e = new ArrayList<>(users);
+        Collections.sort(e);
+
+        for (User i : e) {
+            System.out.println(i);            
+        }
+    }
+
+    // skriv ut saker
 
     // Debug metoder------------------------
     public void printBookCount() {

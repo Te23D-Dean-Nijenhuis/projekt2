@@ -242,6 +242,8 @@ public class Main {
                     break;
 
                 case 5:
+                    sortMenu();
+                    choice = choice(3, keyboard);
 
                     break;
 
@@ -394,6 +396,22 @@ public class Main {
 
     // case 4 menyer
     // -----------------------------------------------------------------------------
+
+    // case 5 menyer
+    // -----------------------------------------------------------------------------
+
+    public static void sortMenu() {
+        System.out.println("======================================");
+        System.out.println("| Meny:                              |");
+        System.out.println("| Val 1: Skriv ut böcker sorterat.   |");
+        System.out.println("| Val 2: skriv ut tidningar sorterat.|");
+        System.out.println("| Val 3: skriv ut användare sorterat.|");
+        System.out.println("======================================");
+    }
+
+    // case 5 menyer
+    // -----------------------------------------------------------------------------
+    
 
     public static void printSortMenu() { // meny för att välja ifall man vill skriva ut sorterat eller inte.
         System.out.println("==============================");
