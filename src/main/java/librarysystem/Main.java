@@ -38,15 +38,40 @@ public class Main {
                         case 1:
                             bookFetchMenu();
                             choice = choice(2, keyboard);
+                            switch (choice) {
+                                case 1:
+                                    library.importAllBooks();
+        
+                                    System.out.println("Alla böcker importerade");
+                                    
+                                    break;
 
-                            // library.importAllBooks();
+                                case 2:
+                                    
+                                    break;
+                            
+                                default:
+                                    break;
+                            }
 
-                            // System.out.println("Alla böcker importerade");
 
                             break;
                         case 2:
                             magazineFetchMenu();
                             choice = choice(2, keyboard);
+
+                            switch (choice) {
+                                case 1:
+                                    
+                                    break;
+
+                                case 2:
+                                    
+                                    break;
+                            
+                                default:
+                                    break;
+                            }
 
                             // library.importAllMagazines();
 
@@ -56,9 +81,35 @@ public class Main {
 
                         case 3:
 
+                        switch (choice) {
+                            case 1:
+                                
+                                break;
+
+                            case 2:
+                                
+                                break;
+                        
+                            default:
+                                break;
+                        }
+
                             break;
 
                         case 4:
+
+                        switch (choice) {
+                            case 1:
+                                
+                                break;
+
+                            case 2:
+                                
+                                break;
+                        
+                            default:
+                                break;
+                        }
 
                             break;
 

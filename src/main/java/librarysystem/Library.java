@@ -37,14 +37,25 @@ public class Library {
 
         String json_data = response.getBody();
 
-        Type type = new TypeToken<ArrayList<Book>>() {
-        }.getType();
+        Type type = new TypeToken<ArrayList<Book>>() {}.getType();
 
         books = gson.fromJson(json_data, type);
 
         if (books == null) {
             books = new ArrayList<>();
         }
+    }
+
+    public Book importBookById(String id) { //hämta en bok från server utifrån id
+        HttpResponse<String> response = Unirest.get(baseUrl + "books/" + id).asString();
+
+        String json_data = response.getBody();
+
+        Type type = new TypeToken<Book>() {}.getType();
+
+        Book e = gson.fromJson(json_data, type);
+
+        return e;
     }
 
     // hämta magazines från API
