@@ -6,7 +6,7 @@ Denna klassen är som det låter, en Book
 
 package librarysystem;
 
-public class Book extends LibraryItem {
+public class Book extends LibraryItem implements Comparable<Book> {
     private String author;
     private String genre;
     private int pages;
@@ -34,6 +34,10 @@ public class Book extends LibraryItem {
     public String toString() {
         return "Book [Author=" + author + ", genre=" + genre + ", pages=" + pages + ", id=" + id + ", title=" + title
                 + ", isAvailable=" + isAvailable + "]";
+    }
+    @Override
+    public int compareTo(Book other) {
+        return this.title.compareToIgnoreCase(other.title);
     }
 
 }

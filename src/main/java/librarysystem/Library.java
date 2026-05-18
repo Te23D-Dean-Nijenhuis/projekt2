@@ -313,8 +313,10 @@ public class Library {
     
     public void deleteBook(String title) {
         int status;
+        String id = bookMap.get(title).id;
+
         try {
-            status = Unirest.delete(baseUrl + "books/" + title)
+            status = Unirest.delete(baseUrl + "books/" + id)
             .asEmpty()
             .getStatus();
         } catch (UnirestException e) {
@@ -333,8 +335,10 @@ public class Library {
 
     public void deleteMagazine(String title) {
         int status;
+        String id = magazineMap.get(title).id;
+
         try {
-            status = Unirest.delete(baseUrl + "magazines/" + title)
+            status = Unirest.delete(baseUrl + "magazines/" + id)
             .asEmpty()
             .getStatus();
         } catch (UnirestException e) {
@@ -353,8 +357,10 @@ public class Library {
 
     public void deleteUser(String email) {
         int status;
+        String id = userMap.get(email).getId();
+
         try {
-            status = Unirest.delete(baseUrl + "users/" + email)
+            status = Unirest.delete(baseUrl + "users/" + id)
             .asEmpty()
             .getStatus();
         } catch (UnirestException e) {

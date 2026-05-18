@@ -279,16 +279,16 @@ public class Main {
     // koden när dem inte är där uppe
 
     public static void mainMenu() { // main menyn
-        System.out.println("==========================================");
-        System.out.println("| Meny:                                  |");
-        System.out.println("| Val 1: Hämta från servern.             |");
-        System.out.println("| Val 2: Skapa bok/tidning/användare.    |");
-        System.out.println("| Val 3: Hitta bok/tidning/användare.    |");
-        System.out.println("| Val 4: Lägg till en bok i systemet.    |");
-        System.out.println("| Val 5: Lägg till en tidning i systemet.|");
-        System.out.println("| Val 6: Avsluta programmet.             |");
-        System.out.println("| Skriv 1-6.                             |");
-        System.out.println("==========================================");
+        System.out.println("========================================");
+        System.out.println("| Meny:                                |");
+        System.out.println("| Val 1: Hämta från servern.           |");
+        System.out.println("| Val 2: Skapa bok/tidning/användare.  |");
+        System.out.println("| Val 3: Hitta bok/tidning/användare.  |");
+        System.out.println("| Val 4: Ta bort bok/tidning/användare.|");
+        System.out.println("| Val 5: Sortera bok/tidning/användare.|");
+        System.out.println("| Val 6: Avsluta programmet.           |");
+        System.out.println("| Skriv 1-6.                           |");
+        System.out.println("========================================");
     }
 
     // Case 1 menyer
