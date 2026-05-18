@@ -102,13 +102,14 @@ public class Main {
     // Meny metoderna är här för att detblir mycket enklare att läsa och ändra i
     // koden när dem inte är där uppe
 
-    public static void fetchMenu() { // menyn när man ska hämta böcker och tidningar från servern
+    public static void fetchMenu() { // menyn när man ska hämta olika saker från server
         System.out.println("===============================");
         System.out.println("| Meny:                       |");
-        System.out.println("| Val 1: hämta alla böcker   .|");
-        System.out.println("| Val 2: hämta alla tidningar.|");
+        System.out.println("| Val 1: hämta böcker.        |");
+        System.out.println("| Val 2: hämta tidningar.     |");
+        System.out.println("| val 3: hämta användare      |");
         System.out.println("| Skriv 1-2.                  |");
-        System.out.println("==============================");
+        System.out.println("===============================");
     }
 
     public static void printMenu() { // meny för när man vill skriva ut
@@ -123,7 +124,7 @@ public class Main {
     public static void mainMenu() { // main menyn
         System.out.println("==========================================");
         System.out.println("| Meny:                                  |");
-        System.out.println("| Val 1: Hämta böcker/tidningar.         |");
+        System.out.println("| Val 1: Hämta från servern.             |");
         System.out.println("| Val 2: Hämta tidningar.     asdasd     |");
         System.out.println("| Val 3: Skriv ut hämtade artiklar.      |");
         System.out.println("| Val 4: Lägg till en bok i systemet.    |");
