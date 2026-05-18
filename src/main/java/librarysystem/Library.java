@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
+import kong.unirest.UnirestException;
 
 import java.util.Scanner;
 
@@ -36,8 +37,14 @@ public class Library {
 
     // hämta böcker från API
     public void importAllBooks() {
+        HttpResponse<String> response;
+        try {
+            response = Unirest.get(baseUrl + "books").asString();
 
-        HttpResponse<String> response = Unirest.get(baseUrl + "books").asString();
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
 
         String json_data = response.getBody();
 
@@ -53,8 +60,14 @@ public class Library {
 
     // hämta magazines från API
     public void importAllMagazines() {
+        HttpResponse<String> response;
+        try {
+            response = Unirest.get(baseUrl + "magazines").asString();
 
-        HttpResponse<String> response = Unirest.get(baseUrl + "magazines").asString();
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
 
         String json_data = response.getBody();
 
@@ -69,8 +82,14 @@ public class Library {
     }
 
     public void importAllUsers() {
+        HttpResponse<String> response;
+        try {
+            response = Unirest.get(baseUrl + "users").asString();
 
-        HttpResponse<String> response = Unirest.get(baseUrl + "users").asString();
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
 
         String json_data = response.getBody();
 
@@ -85,8 +104,14 @@ public class Library {
     }
 
     public void importAllSuspended() {
+        HttpResponse<String> response;
+        try {
+            response = Unirest.get(baseUrl + "suspended").asString();
 
-        HttpResponse<String> response = Unirest.get(baseUrl + "suspended").asString();
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
 
         String json_data = response.getBody();
 
@@ -101,13 +126,20 @@ public class Library {
     }
 
     public void importBookById(String id) { // hämta en bok från server utifrån id
-        HttpResponse<String> response = Unirest.get(baseUrl + "books/" + id).asString();
+        HttpResponse<String> response;
+        try {
+            response = Unirest.get(baseUrl + "books/" + id).asString();
+
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
 
         String json_data = response.getBody();
 
         Type type = new TypeToken<Book>() {
         }.getType();
-        
+
         if (response.getStatus() == 200) { // checkar att status koden är 200 innan den lägger till annars blir det ett
             // tomt obejekt
             Book e = gson.fromJson(json_data, type);
@@ -120,7 +152,14 @@ public class Library {
     }
 
     public void importMagazineById(String id) { // hämta en tidning från server utifrån id
-        HttpResponse<String> response = Unirest.get(baseUrl + "magazines/" + id).asString();
+        HttpResponse<String> response;
+        try {
+            response = Unirest.get(baseUrl + "magazines/" + id).asString();
+
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
 
         String json_data = response.getBody();
 
@@ -139,7 +178,14 @@ public class Library {
     }
 
     public void importUserById(String id) { // hämta en tidning från server utifrån id
-        HttpResponse<String> response = Unirest.get(baseUrl + "users/" + id).asString();
+        HttpResponse<String> response;
+        try {
+            response = Unirest.get(baseUrl + "users/" + id).asString();
+
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
 
         String json_data = response.getBody();
 
@@ -158,7 +204,14 @@ public class Library {
     }
 
     public void importSuspendedById(String id) { // hämta en tidning från server utifrån id
-        HttpResponse<String> response = Unirest.get(baseUrl + "suspended/" + id).asString();
+        HttpResponse<String> response;
+        try {
+            response = Unirest.get(baseUrl + "users/" + id).asString();
+
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
 
         String json_data = response.getBody();
 
@@ -176,7 +229,6 @@ public class Library {
 
     }
 
-
     // Debug metoder------------------------
     public void printBookCount() {
         System.out.println("Books: " + books.size());
@@ -187,6 +239,7 @@ public class Library {
     }
 
     // -----------------------------------------
+
     public ArrayList<Book> getBooks() {
         return books;
     }
@@ -210,8 +263,6 @@ public class Library {
     }
 
     public void addBook(Scanner keyboard) {
-        String id = Integer.toString(books.size() + 1); // ser till att id blir nästa, ex om det finns 100 böcker så
-                                                        // kommer nästa bli 101
         System.out.println("Ange titel:");
         String title = Main.readString(keyboard);
 
@@ -226,9 +277,12 @@ public class Library {
         System.out.println("Ange antal sidor:");
         int pages = Main.readInt(keyboard);
 
-        Book e = new Book(id, title, isAvailable, author, genre, pages);
+        Book e = new Book(null, title, isAvailable, author, genre, pages);
 
-        books.add(e);
+        HttpResponse<String> response = Unirest.post(baseUrl + "books")
+                .header("Content-type", "application/json")
+                .body(gson.toJson(e))
+                .asString();
     }
 
     public void addMagazine(Scanner keyboard) {
