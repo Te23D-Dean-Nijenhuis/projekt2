@@ -7,7 +7,7 @@ Denna klassen är tidnings objektet
 
 package librarysystem;
 
-public class Magazine extends LibraryItem {
+public class Magazine extends LibraryItem implements Comparable<Magazine>{
     private int issueNumber;
     private String category;
     private int publishedYear;
@@ -35,6 +35,11 @@ public class Magazine extends LibraryItem {
     public String toString() {
         return "Magazine [issueNumber=" + issueNumber + ", category=" + category + ", publishedYear=" + publishedYear
                 + ", id=" + id + ", title=" + title + ", isAvailable=" + isAvailable + "]";
+    }
+
+    @Override
+    public int compareTo(Magazine other) {
+        return this.title.compareToIgnoreCase(other.title);
     }
 
 }
