@@ -137,6 +137,8 @@ public class Main {
                             break;
                     }
 
+                    break;
+
                 case 2:
                     addObjectMeny();
                     choice = choice(4, keyboard);
@@ -168,11 +170,74 @@ public class Main {
 
                     break;
 
-                case 3: 
+                case 3:
+                    findMenu();
+                    choice = choice(4, keyboard);
+
+                    switch (choice) {
+                        case 1:
+                            System.out.println("Ange Titel: ");
+                            library.findBook(readString(keyboard));
+
+                            break;
+
+                        case 2:
+                            System.out.println("Ange Titel: ");
+                            library.findMagazine(readString(keyboard));
+
+                            break;
+
+                        case 3:
+                            System.out.println("Ange Email: ");
+                            library.findUser(readString(keyboard));
+
+                            break;
+
+                        case 4:
+                            System.out.println("Ange Id: ");
+                            library.findSuspended(readString(keyboard));
+
+                            break;
+
+                        default:
+                            break;
+                    }
 
                     break;
 
                 case 4:
+                    deleteMenu();
+                    choice = choice(4, keyboard);
+
+                    switch (choice) {
+                        case 1:
+                            System.out.println("Ange titel: ");
+                            library.deleteBook(readString(keyboard));
+                            
+                            break;
+                    
+                        case 2:
+                            System.out.println("Ange titel: ");
+                            library.deleteMagazine(readString(keyboard));
+
+                            break;
+                    
+                        case 3:
+                            System.out.println("Ange email: ");
+                            library.deleteUser(readString(keyboard));
+                            
+                            break;
+                    
+                        case 4:
+                            System.out.println("Ange id: ");
+                            library.deleteSuspended(readString(keyboard));
+                            
+                            break;
+                    
+                        default:
+                            break;
+                    }
+                    
 
                     break;
 
@@ -296,7 +361,7 @@ public class Main {
 
     // case 2 menyer
     // -----------------------------------------------------------------------------
-    
+
     // case 3 menyer
     // -----------------------------------------------------------------------------
     public static void findMenu() {
@@ -309,29 +374,43 @@ public class Main {
         System.out.println("| Skriv 1-4.                       |");
         System.out.println("====================================");
     }
-        
-    
+
     // case 3 menyer
     // -----------------------------------------------------------------------------
-    
+
+    // case 4 menyer
+    // -----------------------------------------------------------------------------
+
+    public static void deleteMenu() {
+        System.out.println("===========================");
+        System.out.println("| Meny:                   |");
+        System.out.println("| Val 1: Ta bort bok.     |");
+        System.out.println("| Val 2: Ta bort tidning. |");
+        System.out.println("| Val 3: Ta bort användar.|");
+        System.out.println("| Val 4: Ta bort avstängd.|");
+        System.out.println("| Skriv 1-4.              |");
+        System.out.println("===========================");
+    }
+
+    // case 4 menyer
+    // -----------------------------------------------------------------------------
+
     public static void printSortMenu() { // meny för att välja ifall man vill skriva ut sorterat eller inte.
-    System.out.println("==============================");
+        System.out.println("==============================");
         System.out.println("| Meny:                      |");
         System.out.println("| Val 1: skriv ut o-sorterat.|");
         System.out.println("| Val 2: skriv ut sorterat.  |");
         System.out.println("| Skriv 1-2.                 |");
         System.out.println("==============================");
     }
-    
-    
-    
+
     public static String readString(Scanner keyboard) { // gör som namnet heter
         String temp = "sfjsifj"; // blev ibland problem när stringen var nullad
 
         temp = keyboard.nextLine();
         return temp;
     }
-    
+
     public static int readInt(Scanner keyboard) { // gör som namnet heter
         int temp = 0;
         boolean success = false;

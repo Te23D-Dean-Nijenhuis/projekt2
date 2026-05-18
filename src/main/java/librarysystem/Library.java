@@ -261,6 +261,138 @@ public class Library {
 
     // importera id -------------------------------
 
+    // hitta saker ---------------------------------
+
+    public void findBook(String Title) {
+        Book e = bookMap.get(Title);
+
+        if (e != null) {
+            System.out.println(e);
+        } else {
+            System.out.println("Boken hittades inte!");
+        }
+
+    }
+
+    public void findMagazine(String Title) {
+        Magazine e = magazineMap.get(Title);
+
+        if (e != null) {
+            System.out.println(e);
+        } else {
+            System.out.println("Tidningen hittades inte!");
+        }
+
+    }
+
+    public void findUser(String email) {
+        User e = userMap.get(email);
+
+        if (e != null) {
+            System.out.println(e);
+        } else {
+            System.out.println("Användaren hittades inte!");
+        }
+
+    }
+
+    public void findSuspended(String id) {
+        SuspendedUser e = suspendedMap.get(id);
+
+        if (e != null) {
+            System.out.println(e);
+        } else {
+            System.out.println("avstängda användaren hittades inte!");
+        }
+
+    }
+
+    // hitta saker ---------------------------------
+
+    // ta bort saker -------------------------------
+    
+    public void deleteBook(String title) {
+        int status;
+        try {
+            status = Unirest.delete(baseUrl + "books/" + title)
+            .asEmpty()
+            .getStatus();
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
+
+        if (status == 200){
+            System.out.println("Boken: " + title + " är borttagen!!");
+        } else if (status == 204) {
+            System.out.println("finns ingen bok med den titeln");
+        } else {
+            System.out.println("Något gick fel. statuskod: " + status);
+        }
+    }
+
+    public void deleteMagazine(String title) {
+        int status;
+        try {
+            status = Unirest.delete(baseUrl + "magazines/" + title)
+            .asEmpty()
+            .getStatus();
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
+
+        if (status == 200){
+            System.out.println("tidningen: " + title + " är borttagen!!");
+        } else if (status == 204) {
+            System.out.println("finns ingen tidning med den titeln");
+        } else {
+            System.out.println("Något gick fel. statuskod: " + status);
+        }
+    }
+
+    public void deleteUser(String email) {
+        int status;
+        try {
+            status = Unirest.delete(baseUrl + "users/" + email)
+            .asEmpty()
+            .getStatus();
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
+
+        if (status == 200){
+            System.out.println("Användaren: " + email + " är borttagen!!");
+        } else if (status == 204) {
+            System.out.println("finns ingen användare med den emailen");
+        } else {
+            System.out.println("Något gick fel. statuskod: " + status);
+        }
+    }
+
+    public void deleteSuspended(String id) {
+        int status;
+        try {
+            status = Unirest.delete(baseUrl + "suspended/" + id)
+            .asEmpty()
+            .getStatus();
+        } catch (UnirestException e) {
+            System.out.println("Error: " + e.getLocalizedMessage());
+            return;
+        }
+
+        if (status == 200){
+            System.out.println("Avstängda användaren med id: " + id + " är borttagen!!");
+        } else if (status == 204) {
+            System.out.println("finns ingen avstängd användare med detta id");
+        } else {
+            System.out.println("Något gick fel. statuskod: " + status);
+        }
+    }
+
+    // ta bort saker -------------------------------
+
     // Debug metoder------------------------
     public void printBookCount() {
         System.out.println("Books: " + books.size());
