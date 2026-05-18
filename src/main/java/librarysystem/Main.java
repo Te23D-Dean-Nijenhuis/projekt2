@@ -213,37 +213,56 @@ public class Main {
                         case 1:
                             System.out.println("Ange titel: ");
                             library.deleteBook(readString(keyboard));
-                            
+
                             break;
-                    
+
                         case 2:
                             System.out.println("Ange titel: ");
                             library.deleteMagazine(readString(keyboard));
 
                             break;
-                    
+
                         case 3:
                             System.out.println("Ange email: ");
                             library.deleteUser(readString(keyboard));
-                            
+
                             break;
-                    
+
                         case 4:
                             System.out.println("Ange id: ");
                             library.deleteSuspended(readString(keyboard));
-                            
+
                             break;
-                    
+
                         default:
                             break;
                     }
-                    
 
                     break;
 
                 case 5:
                     sortMenu();
                     choice = choice(3, keyboard);
+
+                    switch (choice) {
+                        case 1:
+                            library.printSortedBooks();
+
+                            break;
+
+                        case 2:
+                            library.printSortedMagazines();
+
+                            break;
+
+                        case 3:
+                            library.printSortedUsers();
+
+                            break;
+
+                        default:
+                            break;
+                    }
 
                     break;
 
@@ -288,8 +307,9 @@ public class Main {
         System.out.println("| Val 3: Hitta bok/tidning/användare.  |");
         System.out.println("| Val 4: Ta bort bok/tidning/användare.|");
         System.out.println("| Val 5: Sortera bok/tidning/användare.|");
-        System.out.println("| Val 6: Avsluta programmet.           |");
-        System.out.println("| Skriv 1-6.                           |");
+        System.out.println("| Val 6: SK");
+        System.out.println("| Val 7: Avsluta programmet.           |");
+        System.out.println("| Skriv 1-7.                           |");
         System.out.println("========================================");
     }
 
@@ -411,7 +431,6 @@ public class Main {
 
     // case 5 menyer
     // -----------------------------------------------------------------------------
-    
 
     public static void printSortMenu() { // meny för att välja ifall man vill skriva ut sorterat eller inte.
         System.out.println("==============================");
