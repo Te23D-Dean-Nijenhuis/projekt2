@@ -1,7 +1,7 @@
 /*
 Dean Nijenhuis TE23D
 denna klassen gör det lättare att hämta informationen från servern, men den används inte i nuläget- 
-kommer kanske inte göra det alls
+kommer kanske inte göra det alls 
  */
 
 package librarysystem;

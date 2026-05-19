@@ -22,7 +22,7 @@ import java.util.Scanner;
 
 public class Library {
 
-    private String baseUrl = "http://localhost:3000/";
+    private String baseUrl = "http://10.151.168.5:3104/";
     private Gson gson = new Gson();
 
     private ArrayList<Book> books;
@@ -45,6 +45,20 @@ public class Library {
         this.userMap = new HashMap<>();
         this.suspendedMap = new HashMap<>();
     }
+
+    // check users ---------------------------------
+
+    public void checkUsers(){
+        for (User i : users) {
+            if(suspendedMap.containsKey(i.getId().toLowerCase())) {
+                System.out.println(i.getName() + " Får ej låna!!");
+            } else {
+                System.out.println(i.getName() + " Får låna!!");
+            }
+        }
+    }
+
+    // check users ---------------------------------
 
     // importera all ------------------------------
 
@@ -144,9 +158,10 @@ public class Library {
             suspended = new ArrayList<>();
         }
         for (SuspendedUser i : suspended) {
-            suspendedMap.put(i.getId().toLowerCase(), i);
+            suspendedMap.put(i.getCustomerId().toLowerCase(), i);
         }
-    }
+
+    }   
 
     // importera all ------------------------------
 
@@ -252,7 +267,7 @@ public class Library {
                                            // tomt obejekt
             SuspendedUser e = gson.fromJson(json_data, type);
             suspended.add(e);
-            suspendedMap.put(e.getId().toLowerCase(), e);
+            suspendedMap.put(e.getCustomerId().toLowerCase(), e);
             System.out.println("Hämtade avstängda användaren: " + e);
         } else {
             System.out.println("Denna avstängda användaren finns inte!");
@@ -311,21 +326,21 @@ public class Library {
     // hitta saker ---------------------------------
 
     // ta bort saker -------------------------------
-    
+
     public void deleteBook(String title) {
         int status;
         String id = bookMap.get(title).id;
 
         try {
             status = Unirest.delete(baseUrl + "books/" + id)
-            .asEmpty()
-            .getStatus();
+                    .asEmpty()
+                    .getStatus();
         } catch (UnirestException e) {
             System.out.println("Error: " + e.getLocalizedMessage());
             return;
         }
 
-        if (status == 200){
+        if (status == 200) {
             System.out.println("Boken: " + title + " är borttagen!!");
         } else if (status == 204) {
             System.out.println("finns ingen bok med den titeln");
@@ -340,14 +355,14 @@ public class Library {
 
         try {
             status = Unirest.delete(baseUrl + "magazines/" + id)
-            .asEmpty()
-            .getStatus();
+                    .asEmpty()
+                    .getStatus();
         } catch (UnirestException e) {
             System.out.println("Error: " + e.getLocalizedMessage());
             return;
         }
 
-        if (status == 200){
+        if (status == 200) {
             System.out.println("tidningen: " + title + " är borttagen!!");
         } else if (status == 204) {
             System.out.println("finns ingen tidning med den titeln");
@@ -362,14 +377,14 @@ public class Library {
 
         try {
             status = Unirest.delete(baseUrl + "users/" + id)
-            .asEmpty()
-            .getStatus();
+                    .asEmpty()
+                    .getStatus();
         } catch (UnirestException e) {
             System.out.println("Error: " + e.getLocalizedMessage());
             return;
         }
 
-        if (status == 200){
+        if (status == 200) {
             System.out.println("Användaren: " + email + " är borttagen!!");
         } else if (status == 204) {
             System.out.println("finns ingen användare med den emailen");
@@ -382,14 +397,14 @@ public class Library {
         int status;
         try {
             status = Unirest.delete(baseUrl + "suspended/" + id)
-            .asEmpty()
-            .getStatus();
+                    .asEmpty()
+                    .getStatus();
         } catch (UnirestException e) {
             System.out.println("Error: " + e.getLocalizedMessage());
             return;
         }
 
-        if (status == 200){
+        if (status == 200) {
             System.out.println("Avstängda användaren med id: " + id + " är borttagen!!");
         } else if (status == 204) {
             System.out.println("finns ingen avstängd användare med detta id");
@@ -400,14 +415,14 @@ public class Library {
 
     // ta bort saker -------------------------------
 
-    // skriv ut saker
+    // skriv ut saker-------------------------------------
 
     public void printSortedBooks() {
         ArrayList<Book> e = new ArrayList<>(books);
         Collections.sort(e);
 
         for (Book i : e) {
-            System.out.println(i);            
+            System.out.println(i);
         }
     }
 
@@ -416,7 +431,7 @@ public class Library {
         Collections.sort(e);
 
         for (Magazine i : e) {
-            System.out.println(i);            
+            System.out.println(i);
         }
     }
 
@@ -425,11 +440,19 @@ public class Library {
         Collections.sort(e);
 
         for (User i : e) {
-            System.out.println(i);            
+            System.out.println(i);
         }
     }
 
-    // skriv ut saker
+    // skriv ut saker-------------------------------------
+
+    // avgör om får långa -------------------------------------
+
+    public void borrowCheck() {
+
+    }
+
+    // avgör om får långa -------------------------------------
 
     // Debug metoder------------------------
     public void printBookCount() {
@@ -578,10 +601,10 @@ public class Library {
 
     public void addSuspendedUser(Scanner keyboard) {
 
-        System.out.println("Ange userId:");
-        String userId = Main.readString(keyboard);
+        System.out.println("Ange customer id:");
+        String customer_id = Main.readString(keyboard);
 
-        SuspendedUser s = new SuspendedUser("0", userId);
+        SuspendedUser s = new SuspendedUser("0", customer_id);
 
         HttpResponse<String> response;
 

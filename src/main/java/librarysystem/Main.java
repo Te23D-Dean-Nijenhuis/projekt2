@@ -25,9 +25,9 @@ public class Main {
         Library library = new Library(); // skapar en instans av biblioteket
         int choice = -999;
 
-        while (choice != 6) {
+        while (choice != 7) {
             mainMenu();
-            choice = choice(6, keyboard);
+            choice = choice(7, keyboard);
 
             switch (choice) {
                 case 1:
@@ -114,7 +114,7 @@ public class Main {
 
                             switch (choice) {
                                 case 1:
-                                    library.importAllUsers();
+                                    library.importAllSuspended();
 
                                     System.out.println("Alla avstängda användare importerade.");
 
@@ -267,29 +267,18 @@ public class Main {
                     break;
 
                 case 6:
-                    // Skriva ut saker
-                    // printSortMenu();
-                    // choice = choice(2, keyboard);
+                    library.checkUsers();
 
-                    // switch (choice) {
-                    // case 1:
-                    // library.printBooks();
-                    // break;
+                    break;
 
-                    // case 2:
-                    // library.printMagazines();
-                    // break;
-
-                    // default:
-                    // break;
-                    // }
+                case 7:
 
                     break;
 
                 default:
                     break;
             }
-            if (choice != 6) {
+            if (choice != 7) {
                 backToMenu(keyboard);
             }
         }
@@ -307,7 +296,7 @@ public class Main {
         System.out.println("| Val 3: Hitta bok/tidning/användare.  |");
         System.out.println("| Val 4: Ta bort bok/tidning/användare.|");
         System.out.println("| Val 5: Sortera bok/tidning/användare.|");
-        System.out.println("| Val 6: SK");
+        System.out.println("| Val 6: Avgör vilka som får låna      |");
         System.out.println("| Val 7: Avsluta programmet.           |");
         System.out.println("| Skriv 1-7.                           |");
         System.out.println("========================================");

@@ -8,24 +8,24 @@ package librarysystem;
 
 public class SuspendedUser {
     private String id;
-    private String userId;
+    private String customer_id;
 
-    public SuspendedUser(String id, String userId) {
+    public SuspendedUser(String id, String customer_id) {
         this.id = id;
-        this.userId = userId;
+        this.customer_id = customer_id;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getCustomerId() {
+        return customer_id;
     }
 
     @Override
     public String toString() {
-        return "SuspendedUser [id=" + id + ", userId=" + userId + "]";
+        return "SuspendedUser [id=" + id + ", userId=" + customer_id + "]";
     }
     
 
